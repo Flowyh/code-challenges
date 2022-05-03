@@ -9,6 +9,24 @@
 
 ### Date: 03.05.2022
 
+### Run with:
+
+```sh
+julia LHCargo.jl [comma separated numbers]
+
+# Example 2nd approach:
+liquid_helium_2022/2nd-approach$ julia LHCargo.jl "1,2,3"
+
+# Pre-defined tests 2nd approach:
+liquid_helium_2022/2nd-approach$ julia run_tests.jl
+
+# Example 3rd approach
+liquid_helium_2022/3rd-approach$ julia LHCargo.jl "1,2,3"
+
+# Pre-defined tests 3rd approach:
+liquid_helium_2022/3rd-approach$ julia run_tests.jl
+```
+
 ## Solution:
 
 #### First approach:
@@ -158,10 +176,10 @@ After removing right-trailing zeros:
     - creating new rows in the matrix - worst case O(max_height)
 - 2nd step:
   - Iterating through the matrix to get rid of right-trailing zeros
-  - Worst case: (no right-trailing zeros) O(n \* max_height)
+  - Worst case - (no right-trailing zeros) O(n \* max_height)
 - 3rd step:
   - Iterating through the matrix to count all the zeros left
-  - Worst case: O((n - 2) \* max_height)
+  - Worst case - O((n - 2) \* max_height)
 
 Summed time complexity:
 
