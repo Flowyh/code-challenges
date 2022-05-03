@@ -1,5 +1,3 @@
-include("./2nd-approach/LHCargo.jl")
-
 struct CargoUnit
   blocks::Vector{Int}
   expected_capacity::Int
@@ -20,20 +18,3 @@ const Tests = Vector{CargoUnit}([
   CargoUnit([4,2,0,3,2,5], 9),
   CargoUnit([6,4,2,0,3,2,0,3,1,4,5,3,2,7,5,3,0,1,2,1,3,4,6,8,1,3], 83)
 ])
-
-function run_tests()
-  for test in Tests
-    println("Test: $test")
-    cargo = blocks_to_bits(test.blocks)
-    @assert test.expected_capacity == count_helium(cargo)
-    println("Test passed!")
-  end
-end
-
-function main(args::Array{String})
-  run_tests()
-end
-
-if abspath(PROGRAM_FILE) == @__FILE__
-  main(ARGS)
-end
