@@ -78,7 +78,7 @@ More explanation in README.md (2nd approach).
 
 # Returns:
 
-- `capacity::Int` - cargo unit's capacity
+- `capacity::Int` - cargo unit's capacity.
 
 """
 function count_helium(cargo::Vector{BitVector})::Int
