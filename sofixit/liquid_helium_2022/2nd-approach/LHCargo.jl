@@ -1,3 +1,13 @@
+"""
+    truncate_trailing_zeros!(bits)
+
+Truncate right trailing zeros from all BitVectors of given Vector.
+
+# Params:
+
+- `bits::Vector{BitVector}` - list of bit sequences as `BitVector`s.
+
+"""
 function truncate_trailing_zeros!(bits::Vector{BitVector})
   for vector in 1:length(bits)
     right_truncated = false
@@ -8,13 +18,30 @@ function truncate_trailing_zeros!(bits::Vector{BitVector})
         pop!(bits[vector])
       else 
         right_truncated = true
+        break
       end
     end
   end
 end
 
+"""
+    blocks_to_bits(blocks)
+
+Convert liquid helium cargo unit's list of blocks to bit sequences, representing each cargo's level.
+
+More explanation in README.md (2nd approach).
+
+# Params:
+
+- `blocks::Vector{Int}` - list of consequent blocks' heights in cargo unit.
+
+# Returns:
+
+- `Vector{BitVector}` of bit sequences representing cargo's levels.
+
+"""
 function blocks_to_bits(blocks::Vector{Int})::Vector{BitVector}
-  result = Vector{BitVector}(undef, 0)
+  result::Vector{BitVector} = []
   max_height = 0
   for block in blocks
     for i in 1:max_height
@@ -37,8 +64,25 @@ function blocks_to_bits(blocks::Vector{Int})::Vector{BitVector}
   return result
 end
 
-function count_helium(cargo::Vector{BitVector})
-  capacity = 0
+"""
+
+    count_helium(cargo)
+
+Get liquid helium capacity in cargo unit, based on bits sequences representing cargo's levels.
+
+More explanation in README.md (2nd approach).
+
+# Params:
+
+- `cargo::Vector{BitVector}` - vector of bit sequences representing cargo's levels.
+
+# Returns:
+
+- `capacity::Int` - cargo unit's capacity
+
+"""
+function count_helium(cargo::Vector{BitVector})::Int
+  capacity::Int = 0
   for level in cargo
     for block in 2:length(level)-1
       if (!level[block])
@@ -49,11 +93,19 @@ function count_helium(cargo::Vector{BitVector})
   return capacity
 end
 
+"""
+    usage()
+
+Print usage message.
+"""
 function usage()
   println("Usage: julia LHCargo.jl [comma separated numbers]")
   println("Example: julia LHCargo.jl \"1,2,3\"")
 end
 
+"""
+Main program function.
+"""
 function main(args::Array{String})
   if (length(args) < 1)
     print("Please provide at least one command line argument.")
@@ -73,6 +125,7 @@ function main(args::Array{String})
   end
 end
 
+# Equivalent of Python's if __name__ == "__main__".
 if abspath(PROGRAM_FILE) == @__FILE__
   main(ARGS)
 end
